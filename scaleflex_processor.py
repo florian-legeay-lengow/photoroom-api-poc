@@ -12,18 +12,19 @@ from typing import Optional, Dict, Any
 
 
 # Default configuration constants
-DEFAULT_INPUT_CSV = "test_files/Catalog One Vertical.csv"
-DEFAULT_OUTPUT_CSV = "test_files/Catalog One Vertical_processed.csv"
-DEFAULT_IMAGE_URL_COLUMN = "image_link"
-DEFAULT_BRAND_COLUMN = "brand"
-DEFAULT_TITLE_COLUMN = "title"
-DEFAULT_DESCRIPTION_COLUMN = None
+DEFAULT_INPUT_CSV = "test_files/dior_feed.csv"
+DEFAULT_OUTPUT_CSV = "test_files/dior_feed_processed.csv"
+DEFAULT_IMAGE_URL_COLUMN = "image_link" # "image_link"
+DEFAULT_BRAND_COLUMN = "brand" # "brand"
+DEFAULT_TITLE_COLUMN = "title" # "title"
+DEFAULT_DESCRIPTION_COLUMN = "description" #None
 DEFAULT_EAN_COLUMN = None
-DEFAULT_GTIN_COLUMN = "gtin"
-DEFAULT_PRODUCT_ID_COLUMN = "id"
+DEFAULT_GTIN_COLUMN = "gtin" # "gtin"
+DEFAULT_PRODUCT_ID_COLUMN = "id" # "id"
 DEFAULT_PRESET = "amz_hero"
 DEFAULT_FOLDER = "/Products/TEST_FLE"
-DEFAULT_ROW_LIMIT = None  # None means process all rows
+DEFAULT_ROW_LIMIT = 150  # None means process all rows
+DEFAULT_ROW_DELIMITER = '|'  # Change to '|' if your CSV uses pipe delimiter
 
 
 class ScaleflexProcessor:
@@ -350,7 +351,7 @@ class ScaleflexProcessor:
             df = pd.read_csv(
                 input_csv,
                 encoding='utf-8',
-                sep=',',              # Use pipe delimiter
+                sep=DEFAULT_ROW_DELIMITER,              # Use pipe delimiter
                 on_bad_lines='warn',  # Skip bad lines instead of failing
                 engine='python',      # Use Python engine for better error handling
                 quoting=1,            # QUOTE_ALL - handle quoted fields properly
